@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/hexagrid/grid.gd" type="Script" id=1]
+[ext_resource path="res://scenes/game/game.gd" type="Script" id=2]
+[ext_resource path="res://scenes/hexagrid/grid_visualizer.gd" type="Script" id=3]
+[ext_resource path="res://scenes/game/grid_layout.tres" type="Resource" id=4]
+[ext_resource path="res://scenes/hexagrid/path_finding/grid_path_finder.gd" type="Script" id=5]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Grid" type="Node2D" parent="."]
+script = ExtResource( 1 )
+layout = ExtResource( 4 )
+
+[node name="GridPathFinder" type="Node2D" parent="."]
+script = ExtResource( 5 )
+grid_path = NodePath("../Grid")
+
+[node name="GridVisualizer" type="Node2D" parent="."]
+position = Vector2( 1, 0 )
+script = ExtResource( 3 )
+grid_path = NodePath("../Grid")
+show_neighbors_diagonal = false
