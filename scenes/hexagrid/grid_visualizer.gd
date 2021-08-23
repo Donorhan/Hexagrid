@@ -25,6 +25,7 @@ export var show_custom_cells : bool = true
 export var custom_cells_color : Color = Color(0.32, 0.91, 0.51)
 export var line : bool = false
 export var line_color : Color = Color(0.82, 0.70, 0.94)
+export var show_text : bool = true
 export var text_color : Color = Color(1, 1, 1)
 
 var active_cell : Vector3 = Vector3.ZERO
@@ -66,9 +67,10 @@ func _draw() -> void:
 	if show_custom_cells:
 		draw_cells(custom_cells, custom_cells_color, true)
 
-	var position = grid.layout.cell_to_pixel(active_cell)
-	draw_string(defaultFont, position + Vector2(-30, 0), var2str(active_cell), text_color)
-	draw_string(defaultFont, position + Vector2(-15, 30), var2str(Cell.axial_from_cube(active_cell)), text_color)
+	if show_text:
+		var position = grid.layout.cell_to_pixel(active_cell)
+		draw_string(defaultFont, position + Vector2(-30, 0), var2str(active_cell), text_color)
+		draw_string(defaultFont, position + Vector2(-15, 30), var2str(Cell.axial_from_cube(active_cell)), text_color)
 
 func draw_cell(cell : Vector3, color : Color, filled : bool = false) -> void:
 	var points = cell_corners(cell)
