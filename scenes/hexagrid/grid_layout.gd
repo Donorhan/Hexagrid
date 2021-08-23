@@ -33,6 +33,13 @@ func cell_to_pixel(cell : Vector3) -> Vector2:
 
 	return Vector2(x + origin.x, y + origin.y)
 
+func cells_to_pixels(cells : PoolVector3Array) -> PoolVector2Array:
+	var positions = PoolVector2Array()
+	for i in cells:
+		positions.push_back(cell_to_pixel(i))
+
+	return positions
+
 func pixel_to_cell(position : Vector2) -> Vector3:
 	var pt = Vector2(
 		(position.x - origin.x) / cell_size.x,
@@ -43,3 +50,10 @@ func pixel_to_cell(position : Vector2) -> Vector3:
 	var r = orientation[6] * pt.x + orientation[7] * pt.y;
 
 	return Cell.round_cell(Vector3(q, -q - r, r))
+
+func pixels_to_cells(positions : PoolVector2Array) -> PoolVector3Array:
+	var cells = PoolVector2Array()
+	for i in positions:
+		cells.push_back(pixel_to_cell(i))
+
+	return cells
